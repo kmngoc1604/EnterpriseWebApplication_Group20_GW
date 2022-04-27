@@ -1,0 +1,11 @@
+@page "/RegisterConfirmation/"
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Email confirmation required";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    An email has been sent, please follow the instructions and
+    <a href="@Model.UrlContinue">Click here to continue</a>
+</p>

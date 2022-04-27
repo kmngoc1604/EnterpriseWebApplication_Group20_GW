@@ -1,0 +1,83 @@
+﻿@model EnterpriseWebApplication.Models.Entities.NIdea
+@using EnterpriseWebApplication.Models.Entities 
+
+@{
+    ViewData["Title"] = "Details";
+
+    var Comments = (List<Comment>)ViewData["Comments"];
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>NIdea</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Brief)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Brief)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FilePath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.View)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.View)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Submission)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Submission.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+</div>
+
+<form class="input-group mb-3" asp-action="Comment">
+    <input type="hidden" name="IdeaId" value="@Model.Id" />
+    <input type="text" class="form-control" placeholder="Comment" name="Content">
+    <button class="btn btn-outline-success" type="submit">Comment</button>
+</form>
+
+@foreach (var comment in Comments)
+{
+    <hr />
+    <div>(@comment.CreatedDate) - @comment.Content</div>
+}
+
+<hr />
+
+<div>
+    <a asp-action="Details" asp-route-submissionid="@Model.SubmissionId">Back to List</a>
+</div>

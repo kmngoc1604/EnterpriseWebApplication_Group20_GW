@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EnterpriseWebApplication.Models.Entities.Submission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline_2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        var bgColor = "bg-success";
+
+        if ((DateTime.Now - item.Deadline_2).TotalMilliseconds > 0)
+        {
+            bgColor = "bg-danger";
+        }
+        else if ((DateTime.Now - item.Deadline_1).TotalMilliseconds > 0)
+        {
+            bgColor = "bg-warning";
+        }
+        <tr class="@bgColor">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline_1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline_2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-submissionid="@item.Id">View Ideas</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

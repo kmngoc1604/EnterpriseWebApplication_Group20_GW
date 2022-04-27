@@ -1,0 +1,41 @@
+﻿@page "/admin/role/"
+@model EnterpriseWebApplication.Areas.Admin.Pages.Role.IndexModel
+
+<h3>ROLE LIST</h3>
+    <partial name="_StatusMessage" model="@Model.StatusMessage" />
+
+    <form method="POST" class="my-1 d-inline">
+        <button class="btn btn-secondary" asp-page="./Add"
+                asp-page-handler="StartNewRole">
+            Add New Role
+        </button>
+    </form>
+    <a class="btn btn-secondary" asp-page="./User">Add role to a user</a>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Task</th>
+        </tr>
+        @foreach (var role in @Model.roles)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td>
+                    <form method="POST" class="d-inline">
+                        <button name="Input.ID" value="@role.Id" class="btn btn-success btn-sm"
+                                asp-page="./Add" asp-page-handler="StartUpdate">
+                            Cập nhật Role
+                        </button>
+                    </form>
+                    <form method="POST" class="d-inline">
+                        <button name="Input.ID" value="@role.Id" class="btn btn-success btn-sm"
+                                asp-page="./Delete">
+                            Delete Role
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>

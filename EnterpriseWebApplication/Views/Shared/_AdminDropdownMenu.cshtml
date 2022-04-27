@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using EnterpriseWebApplication.Models
+@using Microsoft.AspNetCore.Authorization
+@inject SignInManager<AppUser> SignInManager
+
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService
+@if (SignInManager.IsSignedIn(User)
+   && (await authorizationService.AuthorizeAsync(User, "AdminDropdown")).Succeeded)
+{
+    <li class="nav-item dropdown">
+        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Manager
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+            <a class="dropdown-item" asp-page="/Role/Index" asp-area="Admin">Manage roles</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-page="/Role/User" asp-area="Admin">Users' Roles'</a>
+
+            <a class="dropdown-item"
+               asp-controller="Category"
+               asp-action="Index"
+               asp-area="Admin">Categories</a>
+
+            <a class="dropdown-item"
+               asp-controller="Post"
+               asp-action="Index"
+               asp-area="Admin">Ideas</a>
+
+        </div>
+    </li>
+}
