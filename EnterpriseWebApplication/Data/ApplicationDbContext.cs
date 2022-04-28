@@ -33,7 +33,7 @@ namespace EnterpriseWebApplication.Data
                 entity.HasIndex(p => p.Slug);
             });
         }
-        public DbSet<Department> Departments { get; set; }
+        //public DbSet<Department> Departments { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<NIdea> Ideas { get; set; }
