@@ -1,9 +1,0 @@
-﻿@page
-@model EnterpriseWebApplication.Areas.Upload.UploadOneFileModel
-<form method="post" enctype="multipart/form-data">
-    <label asp-for="@Model.FileUpload"></label>
-    <input asp-for="@Model.FileUpload" />
-    <span asp-validation-formaction="@Model.FileUpload"></span>
-
-    <button class="btn btn-danger" asp-page="UploadOneFile">Upload</button>
-</form>

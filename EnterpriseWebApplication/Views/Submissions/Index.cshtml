@@ -31,11 +31,11 @@
 @foreach (var item in Model) {
         var bgColor = "bg-success";
 
-        if ((DateTime.Now - item.Deadline_2).TotalMilliseconds > 0)
+        if (item.Deadline_2 < DateTime.Now)
         {
             bgColor = "bg-danger";
         }
-        else if ((DateTime.Now - item.Deadline_1).TotalMilliseconds > 0)
+        else if (item.Deadline_1 < DateTime.Now)
         {
             bgColor = "bg-warning";
         }
@@ -57,6 +57,8 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-submissionid="@item.Id">View Ideas</a>
+                <a asp-action="ExportZIP" asp-route-submissionid="@item.Id">Download Ideas</a>
+                <a asp-action="ExportExcel" asp-route-submissionid="@item.Id">Download Ideas</a>
             </td>
         </tr>
 }

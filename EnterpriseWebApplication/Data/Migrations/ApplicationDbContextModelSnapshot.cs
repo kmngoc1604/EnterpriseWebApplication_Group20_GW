@@ -37,6 +37,9 @@ namespace EnterpriseWebApplication.Data.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -84,6 +87,8 @@ namespace EnterpriseWebApplication.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -163,6 +168,27 @@ namespace EnterpriseWebApplication.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("EnterpriseWebApplication.Models.Entities.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("EnterpriseWebApplication.Models.Entities.NIdea", b =>
@@ -405,6 +431,17 @@ namespace EnterpriseWebApplication.Data.Migrations
                     b.ToTable("UserTokens");
                 });
 
+            modelBuilder.Entity("EnterpriseWebApplication.Models.AppUser", b =>
+                {
+                    b.HasOne("EnterpriseWebApplication.Models.Entities.Department", "Department")
+                        .WithMany("Users")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("EnterpriseWebApplication.Models.Entities.Category", b =>
                 {
                     b.HasOne("EnterpriseWebApplication.Models.Entities.Category", "ParentCategory")
@@ -536,6 +573,11 @@ namespace EnterpriseWebApplication.Data.Migrations
                     b.Navigation("CategoryChildren");
 
                     b.Navigation("Ideas");
+                });
+
+            modelBuilder.Entity("EnterpriseWebApplication.Models.Entities.Department", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("EnterpriseWebApplication.Models.Entities.NIdea", b =>

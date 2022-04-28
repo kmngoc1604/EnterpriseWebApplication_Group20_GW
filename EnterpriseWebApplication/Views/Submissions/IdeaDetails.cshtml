@@ -1,5 +1,5 @@
 ﻿@model EnterpriseWebApplication.Models.Entities.NIdea
-@using EnterpriseWebApplication.Models.Entities 
+@using EnterpriseWebApplication.Models.Entities
 
 @{
     ViewData["Title"] = "Details";
@@ -64,11 +64,16 @@
     </dl>
 </div>
 
-<form class="input-group mb-3" asp-action="Comment">
-    <input type="hidden" name="IdeaId" value="@Model.Id" />
-    <input type="text" class="form-control" placeholder="Comment" name="Content">
-    <button class="btn btn-outline-success" type="submit">Comment</button>
-</form>
+@if (Model.Submission.Deadline_2 >= DateTime.Now)
+{
+    <form class="input-group mb-3" asp-action="Comment">
+        <input type="hidden" name="IdeaId" value="@Model.Id" />
+        <input type="text" class="form-control" placeholder="Comment" name="Content">
+        <button class="btn btn-outline-success" type="submit">Comment</button>
+    </form>
+}
+
+
 
 @foreach (var comment in Comments)
 {

@@ -9,12 +9,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddIdea">
+        <form asp-action="AddIdea" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input type="hidden" asp-for="SubmissionId" class="form-control" value="@ViewBag.SubmissionId">
             <input type="hidden" asp-for="UserId" class="form-control" value="@ViewBag.UserId">
             <input type="hidden" asp-for="View" class="form-control" value="0" />
+            <input type="hidden" asp-for="FilePath" value="" class="form-control" />
 
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -32,9 +33,8 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FilePath" class="control-label"></label>
-                <input asp-for="FilePath" class="form-control" />
-                <span asp-validation-for="FilePath" class="text-danger"></span>
+                <label class="control-label">Upload file</label>
+                <input type="file" name="file" class="form-control" />
             </div>
 
             <div class="form-group">
